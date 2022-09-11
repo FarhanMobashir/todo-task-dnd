@@ -6,7 +6,8 @@ import { LandingPage } from "./pages/LandingPage";
 import { TodoApp } from "./pages/TodoApp";
 import "react-toastify/dist/ReactToastify.min.css";
 import { Provider } from "react-redux";
-import { store } from "./store";
+import { persistor, store } from "./store";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
   return (
@@ -25,13 +26,15 @@ function App() {
       />
       <AuthProvider>
         <Provider store={store}>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route
-              path="/app"
-              element={<PrivateRoute element={<TodoApp />} />}
-            />
-          </Routes>
+          <PersistGate loading={null} persistor={persistor}>
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route
+                path="/app"
+                element={<PrivateRoute element={<TodoApp />} />}
+              />
+            </Routes>
+          </PersistGate>
         </Provider>
       </AuthProvider>
     </BrowserRouter>
