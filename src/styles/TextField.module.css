@@ -1,0 +1,17 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.input:focus {
+  border: 2px solid #00bcd4;
+  outline: none;
+}
