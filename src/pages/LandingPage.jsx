@@ -6,7 +6,6 @@ import { Navigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const { user, sessionUser } = useAuth();
-  console.log(user, sessionUser);
   if (user || sessionUser) {
     return <Navigate to="/app" />;
   }

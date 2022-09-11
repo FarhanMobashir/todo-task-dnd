@@ -11,7 +11,7 @@ export const AddTodo = ({ status }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("from add", status);
+
     dispatch(addTask({ title, description, status }));
     // setTitle("");
     // setDescription("");

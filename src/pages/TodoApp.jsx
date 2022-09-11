@@ -1,53 +1,82 @@
+import { useCallback } from "react";
+import { DragDropContext } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Modal } from "../components/Modal";
 import { TodoList } from "../components/TodoList";
 import { useAuth } from "../contexts/AuthContext";
+import { updateTask } from "../store/todoSlice";
 import styles from "../styles/TodoApp.module.css";
 
 export const TodoApp = () => {
   const { logout } = useAuth();
   const todos = useSelector((state) => state.todos);
+  const dispatch = useDispatch();
 
-  const transformTodosBasedOnStatus = () => {
-    const todosToDo = todos.filter((todo) => todo.status === "todo");
-    const todosInProgress = todos.filter(
-      (todo) => todo.status === "inProgress"
-    );
-    const todosDone = todos.filter((todo) => todo.status === "completed");
+  const move = (source, destination, droppableSource, droppableDestination) => {
+    const sourceClone = Array.from(source);
+    const destClone = Array.from(destination);
+    const [removed] = sourceClone.splice(droppableSource.index, 1);
 
-    return {
-      todosToDo: {
-        status: "todo",
-        todos: todosToDo,
-      },
-      todosInProgress: {
-        status: "inProgress",
-        todos: todosInProgress,
-      },
-      todosDone: {
-        status: "completed",
-        todos: todosDone,
-      },
-    };
+    destClone.splice(droppableDestination.index, 0, removed);
+
+    const result = { ...todos };
+    result[droppableSource.droppableId] = sourceClone;
+    result[droppableDestination.droppableId] = destClone;
+    dispatch(updateTask(result));
+    return result;
   };
 
-  console.log(todos);
+  const reorder = (list, startIndex, endIndex, source) => {
+    // console.log(list, startIndex, endIndex, source);
+    let result = JSON.parse(JSON.stringify(list));
+    let [removed] = result[source].splice(startIndex, 1);
+    result[source].splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const onDragEnd = (result) => {
+    const { source, destination } = result;
+
+    // dropped outside the list
+    if (!destination) {
+      return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+      //   console.log(source, destination);
+      const items = reorder(
+        todos,
+        source.index,
+        destination.index,
+        source.droppableId
+      );
+      dispatch(updateTask(items));
+    } else {
+      const result = move(
+        todos[source.droppableId],
+        todos[destination.droppableId],
+        source,
+        destination
+      );
+      dispatch(updateTask(result));
+    }
+  };
 
   return (
-    <div className={styles.mainContainer}>
-      {/* <Modal>
-        <h1>hello modal</h1>
-      </Modal> */}
-      <div className={styles.header}>
-        <h1>This is the todo app</h1>
-        <button onClick={() => logout()}>Logout</button>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className={styles.mainContainer}>
+        <div className={styles.header}>
+          <h1>This is the todo app</h1>
+          <button onClick={() => logout()}>Logout</button>
+        </div>
+        <div className={styles.content}>
+          {Object.keys(todos).map((key, idx) => {
+            let todoList = todos[key];
+            return <TodoList key={key} todos={todoList} status={key} />;
+          })}
+        </div>
       </div>
-      <div className={styles.content}>
-        {Object.keys(transformTodosBasedOnStatus()).map((key) => {
-          let todoList = transformTodosBasedOnStatus()[key];
-          return <TodoList todos={todoList.todos} status={todoList.status} />;
-        })}
-      </div>
-    </div>
+    </DragDropContext>
   );
 };

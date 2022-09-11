@@ -13,20 +13,23 @@ const createTask = (title, description, status) => ({
   status,
 });
 
-const initialState = [
-  createTask("Learn React", "Learn React", "todo"),
-  createTask("Learn Redux", "Learn Redux", "inProgress"),
-  createTask("Learn Redux", "Learn Redux", "inProgress"),
-  createTask("Learn TypeScript", "Learn TypeScript", "completed"),
-  createTask("Learn TypeScript", "Learn TypeScript", "completed"),
-];
+const initialState = {
+  todo: [createTask("task 1", "Сделать задание по теме курса", "todo")],
+  inProgress: [
+    createTask("task 2", "Сделать задание по теме курса", "inProgress"),
+    createTask("task 3", "Сделать задание по теме курса", "inProgress"),
+  ],
+  completed: [
+    createTask("task 4", "Сделать задание по теме курса", "completed"),
+  ],
+};
 
 export const todoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
     addTask: (state, action) => {
-      state.push(
+      state[action.payload.status].push(
         createTask(
           action.payload.title,
           action.payload.description,
@@ -35,12 +38,18 @@ export const todoSlice = createSlice({
       );
     },
     removeTask: (state, action) => {
-      console.log(action.payload);
-      state.splice(state.indexOf(action.payload), 1);
+      state[action.payload.status].splice(
+        state[action.payload.status].findIndex(
+          (task) => task.id === action.payload.id
+        ),
+        1
+      );
+      //   state.splice(state.indexOf(action.payload), 1);
     },
     updateTask: (state, action) => {
-      const { index, title, description, status } = action.payload;
-      state[index] = { ...state[index], title, description, status };
+      return action.payload;
+      //   const { index, title, description, status } = action.payload;
+      //   state[index] = { ...state[index], title, description, status };
     },
   },
 });

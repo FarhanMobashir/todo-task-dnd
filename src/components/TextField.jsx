@@ -7,6 +7,7 @@ export const TextField = ({
   type = "text",
   placeholder = "",
   info = "",
+  autoFocus = false,
 }) => {
   return (
     <div>
@@ -18,6 +19,7 @@ export const TextField = ({
           type={type}
           className={styles.input}
           placeholder={placeholder}
+          autoFocus={autoFocus}
         />
         <small>{info}</small>
       </label>
