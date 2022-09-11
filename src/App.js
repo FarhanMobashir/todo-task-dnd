@@ -5,6 +5,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { LandingPage } from "./pages/LandingPage";
 import { TodoApp } from "./pages/TodoApp";
 import "react-toastify/dist/ReactToastify.min.css";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
   return (
@@ -22,10 +24,15 @@ function App() {
         theme="dark"
       />
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/app" element={<PrivateRoute element={<TodoApp />} />} />
-        </Routes>
+        <Provider store={store}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route
+              path="/app"
+              element={<PrivateRoute element={<TodoApp />} />}
+            />
+          </Routes>
+        </Provider>
       </AuthProvider>
     </BrowserRouter>
   );
