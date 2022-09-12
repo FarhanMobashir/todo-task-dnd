@@ -1,0 +1,21 @@
+.btn {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-color: #329c89;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnOutline {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid #329c89;
+  background-color: white;
+  color: #329c89;
+  font-weight: bold;
+  cursor: pointer;
+}

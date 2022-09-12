@@ -1,27 +1,15 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-// const status = {
-//   todo: "todo",
-//   inProgress: "inProgress",
-//   completed: "completed",
-// };
-
 const createTask = (title, description, status) => ({
   id: nanoid(),
   title,
   description,
-  status,
 });
 
 const initialState = {
-  todo: [createTask("task 1", "Сделать задание по теме курса", "todo")],
-  inProgress: [
-    createTask("task 2", "Сделать задание по теме курса", "inProgress"),
-    createTask("task 3", "Сделать задание по теме курса", "inProgress"),
-  ],
-  completed: [
-    createTask("task 4", "Сделать задание по теме курса", "completed"),
-  ],
+  todo: [createTask("task 1", "this is task 1")],
+  inProgress: [createTask("task 2", "this is task 2")],
+  completed: [createTask("task 3", "this is task 3")],
 };
 
 export const todoSlice = createSlice({
@@ -30,11 +18,7 @@ export const todoSlice = createSlice({
   reducers: {
     addTask: (state, action) => {
       state[action.payload.status].push(
-        createTask(
-          action.payload.title,
-          action.payload.description,
-          action.payload.status
-        )
+        createTask(action.payload.title, action.payload.description)
       );
     },
     removeTask: (state, action) => {
@@ -51,7 +35,10 @@ export const todoSlice = createSlice({
       //   const { index, title, description, status } = action.payload;
       //   state[index] = { ...state[index], title, description, status };
     },
+    clearTask: (state, action) => {
+      return (state = initialState);
+    },
   },
 });
 
-export const { addTask, removeTask, updateTask } = todoSlice.actions;
+export const { addTask, removeTask, updateTask, clearTask } = todoSlice.actions;

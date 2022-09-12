@@ -1,6 +1,8 @@
 import { createContext, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useSessionStorage } from "../hooks/useSessionStorage";
+import { clearTask } from "../store/todoSlice";
 
 export const AuthContext = createContext();
 
@@ -8,6 +10,7 @@ AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useLocalStorage("user", null);
+  const dispatch = useDispatch();
 
   const [sessionUser, setSessionUser] = useSessionStorage("sessionUser", null);
 
@@ -30,6 +33,7 @@ export const AuthProvider = ({ children }) => {
     setSessionUser(null);
     localStorage.removeItem("user");
     sessionStorage.removeItem("sessionUser");
+    dispatch(clearTask());
   };
 
   return (

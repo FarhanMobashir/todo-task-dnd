@@ -1,0 +1,20 @@
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form {
+  border: 1px solid #e0e0e0;
+  padding: 1rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: white;
+}
+
+.noOutlineInput {
+  outline: none;
+  border: none;
+}

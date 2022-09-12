@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -24,8 +24,8 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <AuthProvider>
-        <Provider store={store}>
+      <Provider store={store}>
+        <AuthProvider>
           <PersistGate loading={null} persistor={persistor}>
             <Routes>
               <Route path="/" element={<LandingPage />} />
@@ -35,8 +35,8 @@ function App() {
               />
             </Routes>
           </PersistGate>
-        </Provider>
-      </AuthProvider>
+        </AuthProvider>
+      </Provider>
     </BrowserRouter>
   );
 }

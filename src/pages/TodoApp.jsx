@@ -1,8 +1,7 @@
-import { useCallback } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Modal } from "../components/Modal";
+import { Button } from "../components/Button";
 import { TodoList } from "../components/TodoList";
 import { useAuth } from "../contexts/AuthContext";
 import { updateTask } from "../store/todoSlice";
@@ -21,6 +20,7 @@ export const TodoApp = () => {
     destClone.splice(droppableDestination.index, 0, removed);
 
     const result = { ...todos };
+
     result[droppableSource.droppableId] = sourceClone;
     result[droppableDestination.droppableId] = destClone;
     dispatch(updateTask(result));
@@ -67,8 +67,8 @@ export const TodoApp = () => {
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={styles.mainContainer}>
         <div className={styles.header}>
-          <h1>This is the todo app</h1>
-          <button onClick={() => logout()}>Logout</button>
+          <h1 className={styles.title}>Awesome Tasks</h1>
+          <Button title="Logout" onClick={() => logout()} />
         </div>
         <div className={styles.content}>
           {Object.keys(todos).map((key, idx) => {

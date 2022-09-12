@@ -13,7 +13,8 @@ export const Modal = ({ children }) => {
   useEffect(() => {
     modalRoot.appendChild(elementRef.current);
     return () => modalRoot.removeChild(elementRef.current);
-  });
+  }, []);
+
   return createPortal(
     <div className={styles.modal}>{children}</div>,
     elementRef.current

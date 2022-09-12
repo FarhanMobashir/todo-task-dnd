@@ -1,5 +1,14 @@
 .mainContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    flex-direction: column;
+  }
+}
+
+.loginImg {
 }

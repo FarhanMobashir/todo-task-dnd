@@ -12,7 +12,7 @@ export const LandingPage = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <img src={loginImg} alt="" />
+      <img src={loginImg} className={styles.loginImg} alt="" />
       <AuthForm />
     </div>
   );

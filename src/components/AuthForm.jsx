@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../contexts/AuthContext";
 import styles from "../styles/AuthForm.module.css";
+import { Button } from "./Button";
 import { TextField } from "./TextField";
 
 export const AuthForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("dummy@user.com");
+  const [password, setPassword] = useState("dummy123");
   const [rememberMe, setRememberMe] = useState(false);
 
   const [users, setUsers] = useState([]);
@@ -69,7 +70,7 @@ export const AuthForm = () => {
             }}
           />
         </label>
-        <button className={styles.btn}>Login</button>
+        <Button title="Login" type="submit" />
       </form>
     </div>
   );
