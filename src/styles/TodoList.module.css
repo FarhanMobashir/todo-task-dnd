@@ -28,6 +28,12 @@
   align-items: center;
 }
 
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
 .todoCount {
   font-weight: bold;
   display: flex;

@@ -45,7 +45,7 @@ export const TodoList = ({ todos, status }) => {
     <div className={styles.container}>
       <div className={styles.upperContainer}>
         <div className={styles.statusContainer}>
-          <h3>{status}</h3>
+          <h3 className={styles.title}>{status}</h3>
           <small className={styles.todoCount}>{todos.length}</small>
         </div>
 

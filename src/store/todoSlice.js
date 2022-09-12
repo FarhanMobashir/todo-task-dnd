@@ -7,9 +7,9 @@ const createTask = (title, description, status) => ({
 });
 
 const initialState = {
-  todo: [createTask("task 1", "this is task 1")],
-  inProgress: [createTask("task 2", "this is task 2")],
-  completed: [createTask("task 3", "this is task 3")],
+  Todo: [createTask("task 1", "this is task 1")],
+  "In Progress": [createTask("task 2", "this is task 2")],
+  Completed: [createTask("task 3", "this is task 3")],
 };
 
 export const todoSlice = createSlice({
@@ -17,6 +17,7 @@ export const todoSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action) => {
+      console.log(action.payload);
       state[action.payload.status].push(
         createTask(action.payload.title, action.payload.description)
       );
