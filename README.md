@@ -31,3 +31,46 @@ List is users:
 5. User can login for a session
 6. User can logout for a session
 7. User can login with remember me and logout
+
+## How to improve
+
+1. By writing unit tests for reducers
+2. By testing components
+3. By writing snapshots tests for bigger components
+
+## how to improve aesthetically
+
+1. should add some micro interaction
+2. should add some responsive design
+
+### Pre-requisites and project setup(in local)
+
+#### Step 1
+
+Install [NodeJs](https://nodejs.org/en/)(if not already installed)
+
+#### Step 2
+
+Clone dev branch of this repo to local using:
+
+     git clone https://github.com/FarhanMobashir/todo-task-dnd.git
+
+#### Step 3
+
+Go into the project folder
+
+     cd project-name
+
+#### Step 4
+
+Install all the npm packages
+
+     yarn
+
+#### Step 5
+
+Run the application using:
+
+     yarn start
+
+The application runs on **localhost:3000**
