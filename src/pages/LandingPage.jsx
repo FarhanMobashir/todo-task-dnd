@@ -12,7 +12,13 @@ export const LandingPage = () => {
 
   return (
     <div className={styles.mainContainer}>
-      <img src={loginImg} className={styles.loginImg} alt="" />
+      <div className={styles.leftContainer}>
+        <h1 className={styles.title}>.taskez</h1>
+        <p className={styles.description}>
+          A simple task management app that helps you keep track of your tasks
+        </p>
+        <img src={loginImg} className={styles.loginImg} alt="" />
+      </div>
       <AuthForm />
     </div>
   );

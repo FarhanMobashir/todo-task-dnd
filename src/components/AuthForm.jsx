@@ -19,7 +19,9 @@ export const AuthForm = () => {
   useEffect(() => {
     fetch("users.json")
       .then((response) => response.json())
-      .then((json) => setUsers(json));
+      .then((data) => {
+        setUsers(data);
+      });
   }, []);
 
   const handleSubmit = (event) => {

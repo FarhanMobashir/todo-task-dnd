@@ -5,13 +5,25 @@
 }
 
 .input {
-  padding: 0.5rem 1rem;
+  padding: 1rem 0.3rem;
   outline: none;
+  border: none;
   border-radius: 5px;
-  border: 1px solid black;
+  width: 100%;
 }
 
 .input:focus {
-  border: 2px solid #329c89;
+  border: none;
   outline: none;
+}
+
+.inputContainer {
+  display: flex;
+  min-width: 200px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 5px;
+  padding: 0 1rem;
+  border: 1px solid black;
 }
